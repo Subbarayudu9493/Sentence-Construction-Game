@@ -4,7 +4,7 @@ import Timer from '../components/Timer';
 import WordOption from '../components/WordOption';
 import SentenceDisplay from '../components/SentenceDisplay';
 import ProgressBar from '../components/ProgressBar';
-import { Question, GameState } from '../types/types';
+import { Question, GameState } from '../types';
 
 interface ApiResponse {
   questions: Question[];
@@ -26,7 +26,7 @@ const Game = () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/questions`);
+      const response = await fetch('/api/questions');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -192,43 +192,37 @@ const Game = () => {
         <div className="mb-8">
           <Timer
             initialTime={30}
-            onComplete={() => handleNextQuestion()}
+            onComplete={handleNextQuestion}
           />
         </div>
 
         <div className="mb-8">
           <SentenceDisplay
             sentence={currentQuestion.sentence}
-            selectedWords={currentAnswers}
-            onWordClick={(index) => handleWordDeselect(index)}
+            answers={currentAnswers}
+            onWordDeselect={handleWordDeselect}
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-8">
+        <div className="flex flex-wrap gap-4 justify-center mb-8">
           {currentQuestion.options.map((word: string) => (
             <WordOption
               key={word}
               word={word}
-              isSelected={currentAnswers.includes(word)}
-              onClick={() => handleWordSelect(word)}
+              onClick={() => !currentAnswers.includes(word) && handleWordSelect(word)}
             />
           ))}
         </div>
 
         <div className="text-center">
           <button
-            onClick={() => handleNextQuestion()}
+            onClick={handleNextQuestion}
             disabled={!isComplete || isTransitioning}
-            className={`
-              px-8 py-3 text-lg font-medium rounded-full shadow-lg
-              transition-all duration-300 transform
-              ${isComplete && !isTransitioning
-                ? 'bg-primary text-white hover:bg-primary-dark hover:scale-105' 
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }
-            `}
+            className={`btn ${
+              isComplete ? 'btn-primary' : 'btn-disabled'
+            } px-8 py-3 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300`}
           >
-            {isTransitioning ? 'Loading...' : gameState.currentQuestion === questions.length - 1 ? 'Finish' : 'Next'}
+            {isTransitioning ? 'Loading...' : 'Next Question'}
           </button>
         </div>
       </div>

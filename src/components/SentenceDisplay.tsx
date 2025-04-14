@@ -1,31 +1,27 @@
-import { SentenceDisplayProps } from '../types/types';
+interface SentenceDisplayProps {
+  sentence: string;
+  answers: string[];
+  onWordDeselect: (index: number) => void;
+}
 
-const SentenceDisplay = ({ sentence, selectedWords, onWordClick }: SentenceDisplayProps) => {
+const SentenceDisplay: React.FC<SentenceDisplayProps> = ({ sentence, answers, onWordDeselect }) => {
   const parts = sentence.split('{blank}');
   
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <div className="text-xl text-gray-700 leading-relaxed">
-        {parts.map((part, index) => (
-          <span key={index}>
-            {part}
-            {index < parts.length - 1 && (
-              <button
-                onClick={() => onWordClick(index)}
-                className={`
-                  mx-2 px-3 py-1 rounded-md text-lg font-medium
-                  ${selectedWords[index]
-                    ? 'bg-primary text-white'
-                    : 'bg-gray-100 text-gray-400'
-                  }
-                `}
-              >
-                {selectedWords[index] || '___'}
-              </button>
-            )}
-          </span>
-        ))}
-      </div>
+    <div className="text-2xl font-medium text-gray-800 mb-8">
+      {parts.map((part, index) => (
+        <span key={index}>
+          {part}
+          {index < parts.length - 1 && (
+            <button
+              onClick={() => onWordDeselect(index)}
+              className="inline-block mx-2 px-4 py-2 bg-blue-100 rounded-lg text-blue-800 hover:bg-blue-200 transition-colors"
+            >
+              {answers[index] || '{blank}'}
+            </button>
+          )}
+        </span>
+      ))}
     </div>
   );
 };
