@@ -1,0 +1,34 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "sentence": "The {blank} jumped over the {blank}.",
+      "options": ["fox", "dog", "cat", "moon"],
+      "correctAnswers": ["fox", "moon"]
+    },
+    {
+      "id": 2,
+      "sentence": "I love to eat {blank} and {blank}.",
+      "options": ["pizza", "ice cream", "salad", "burger"],
+      "correctAnswers": ["pizza", "ice cream"]
+    },
+    {
+      "id": 3,
+      "sentence": "The {blank} is shining in the {blank}.",
+      "options": ["sun", "moon", "sky", "star"],
+      "correctAnswers": ["sun", "sky"]
+    },
+    {
+      "id": 4,
+      "sentence": "My favorite colors are {blank} and {blank}.",
+      "options": ["blue", "red", "green", "yellow"],
+      "correctAnswers": ["blue", "red"]
+    },
+    {
+      "id": 5,
+      "sentence": "I went to the {blank} to buy some {blank}.",
+      "options": ["store", "market", "bread", "milk"],
+      "correctAnswers": ["store", "milk"]
+    }
+  ]
+} 

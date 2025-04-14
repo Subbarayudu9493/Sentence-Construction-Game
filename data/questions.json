@@ -1,0 +1,65 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "sentence": "The {blank} is {blank} than the {blank}.",
+      "options": ["sun", "moon", "brighter", "darker", "star", "planet"],
+      "correctAnswers": ["sun", "brighter", "moon"]
+    },
+    {
+      "id": 2,
+      "sentence": "I {blank} to the {blank} every {blank}.",
+      "options": ["go", "park", "morning", "run", "gym", "evening"],
+      "correctAnswers": ["go", "park", "morning"]
+    },
+    {
+      "id": 3,
+      "sentence": "The {blank} is {blank} in the {blank}.",
+      "sentence": "The {blank} is {blank} in the {blank}.",
+      "options": ["bird", "flying", "sky", "fish", "swimming", "water"],
+      "correctAnswers": ["bird", "flying", "sky"]
+    },
+    {
+      "id": 4,
+      "sentence": "She {blank} a {blank} {blank}.",
+      "options": ["wrote", "beautiful", "poem", "painted", "picture", "drew"],
+      "correctAnswers": ["wrote", "beautiful", "poem"]
+    },
+    {
+      "id": 5,
+      "sentence": "The {blank} {blank} through the {blank}.",
+      "options": ["river", "flows", "valley", "train", "moves", "tunnel"],
+      "correctAnswers": ["river", "flows", "valley"]
+    },
+    {
+      "id": 6,
+      "sentence": "My {blank} is {blank} than {blank}.",
+      "options": ["house", "bigger", "yours", "car", "faster", "mine"],
+      "correctAnswers": ["house", "bigger", "yours"]
+    },
+    {
+      "id": 7,
+      "sentence": "The {blank} {blank} in the {blank}.",
+      "options": ["cat", "sleeps", "sun", "dog", "barks", "yard"],
+      "correctAnswers": ["cat", "sleeps", "sun"]
+    },
+    {
+      "id": 8,
+      "sentence": "I {blank} my {blank} every {blank}.",
+      "options": ["water", "plants", "day", "feed", "pets", "morning"],
+      "correctAnswers": ["water", "plants", "day"]
+    },
+    {
+      "id": 9,
+      "sentence": "The {blank} is {blank} than the {blank}.",
+      "options": ["mountain", "taller", "hill", "ocean", "deeper", "lake"],
+      "correctAnswers": ["mountain", "taller", "hill"]
+    },
+    {
+      "id": 10,
+      "sentence": "She {blank} a {blank} {blank}.",
+      "options": ["baked", "delicious", "cake", "made", "beautiful", "dress"],
+      "correctAnswers": ["baked", "delicious", "cake"]
+    }
+  ]
+} 
