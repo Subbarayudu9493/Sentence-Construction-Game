@@ -5,7 +5,12 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Sentence-Construction-Game/', // This should match your GitHub repository name
+  base: '/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -13,6 +18,7 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    strictPort: true,
     proxy: {
       '/api': {
         target: 'http://localhost:3002',

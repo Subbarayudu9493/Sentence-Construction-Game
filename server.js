@@ -8,7 +8,11 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the dist directory
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'dist'), {
+  setHeaders: (res) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  }
+}));
 
 // API endpoint for questions
 app.get('/api/questions', async (req, res) => {
@@ -31,6 +35,11 @@ app.get('/api/questions', async (req, res) => {
       details: error.message 
     });
   }
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
 });
 
 // Handle client-side routing
