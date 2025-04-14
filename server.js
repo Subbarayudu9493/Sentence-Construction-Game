@@ -13,12 +13,23 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // API endpoint for questions
 app.get('/api/questions', async (req, res) => {
   try {
-    const data = await fs.readFile(path.join(__dirname, 'data', 'questions.json'), 'utf8');
+    console.log('Reading questions file...');
+    const dataPath = path.join(__dirname, 'data', 'questions.json');
+    console.log('Data path:', dataPath);
+    
+    const data = await fs.readFile(dataPath, 'utf8');
+    console.log('Data read successfully');
+    
     const questions = JSON.parse(data);
-    res.json({ questions });
+    console.log('Questions parsed successfully');
+    
+    res.json(questions);
   } catch (error) {
     console.error('Error reading questions:', error);
-    res.status(500).json({ error: 'Failed to load questions' });
+    res.status(500).json({ 
+      error: 'Failed to load questions',
+      details: error.message 
+    });
   }
 });
 

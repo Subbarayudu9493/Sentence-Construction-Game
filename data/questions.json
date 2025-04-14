@@ -15,7 +15,6 @@
     {
       "id": 3,
       "sentence": "The {blank} is {blank} in the {blank}.",
-      "sentence": "The {blank} is {blank} in the {blank}.",
       "options": ["bird", "flying", "sky", "fish", "swimming", "water"],
       "correctAnswers": ["bird", "flying", "sky"]
     },
