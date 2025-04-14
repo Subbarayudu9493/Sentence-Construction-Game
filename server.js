@@ -1,67 +1,42 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
 const path = require('path');
-const fs = require('fs').promises;
 
 const app = express();
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 
-// Enable CORS with specific options
-app.use(cors({
-  origin: '*', // Allow all origins for testing
+// Configure CORS for GitHub Pages
+const corsOptions = {
+  origin: [
+    'https://subbarayudu9493.github.io',
+    'http://localhost:5173'
+  ],
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
-}));
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+};
 
-// Add request logging middleware
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  next();
-});
+app.use(cors(corsOptions));
+app.use(express.json());
 
-// Serve questions endpoint
-app.get('/questions', async (req, res) => {
+// Serve questions from the JSON file
+app.get('/questions', (req, res) => {
   try {
-    console.log('Received request for questions');
-    const dataPath = path.join(__dirname, 'public', 'data.json');
-    console.log('Data file path:', dataPath);
-    
-    const data = await fs.readFile(dataPath, 'utf8');
-    console.log('Successfully read data file');
-    
-    const jsonData = JSON.parse(data);
-    console.log('Successfully parsed JSON data');
-    
-    res.json(jsonData);
-    console.log('Successfully sent response');
+    const questionsPath = path.join(__dirname, 'data', 'questions.json');
+    const questionsData = JSON.parse(fs.readFileSync(questionsPath, 'utf8'));
+    res.json(questionsData);
   } catch (error) {
-    console.error('Error reading data file:', error);
-    res.status(500).json({ 
-      error: 'Failed to read questions data', 
-      details: error.message,
-      stack: error.stack
-    });
+    console.error('Error reading questions:', error);
+    res.status(500).json({ error: 'Failed to load questions' });
   }
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ 
-    error: 'Internal server error',
-    message: err.message,
-    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
-  });
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
 });
 
-// Start server with error handling
-const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`CORS enabled for all origins`);
-  console.log(`Data file location: ${path.join(__dirname, 'public', 'data.json')}`);
-}).on('error', (err) => {
-  console.error('Server failed to start:', err);
-  if (err.code === 'EADDRINUSE') {
-    console.error(`Port ${PORT} is already in use. Please try a different port.`);
-  }
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 }); 
